@@ -1,0 +1,31 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ car.brand }} {{ car.name }}</h1>
+    <p>Описание: {{ car.description }}</p>
+    <p>Цена: {{ car.price }} | Остаток: {{ car.stock }}</p>
+    <hr>
+
+    <h2>Отзывы</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.author }}</strong> (Оценка: {{ comment.rating }}/5) - {{ comment.created_at.strftime('%Y-%m-%d %H:%M') }}<br>
+                {{ comment.text }}
+            </li>
+        {% else %}
+            <p>Пока нет отзывов.</p>
+        {% endfor %}
+    </ul>
+
+    <h3>Оставить отзыв</h3>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{ form.author.label }}: {{ form.author() }}</p>
+        <p>{{ form.text.label }}: {{ form.text() }}</p>
+        <p>{{ form.rating.label }}: {{ form.rating() }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

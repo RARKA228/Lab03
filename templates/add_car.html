@@ -1,0 +1,16 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Добавить автомобиль</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{ form.name.label }}: {{ form.name() }}</p>
+        <p>{{ form.brand.label }}: {{ form.brand() }}</p>
+        <p>{{ form.description.label }}: {{ form.description() }}</p>
+        <p>{{ form.price.label }}: {{ form.price() }}</p>
+        <p>{{ form.stock.label }}: {{ form.stock() }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

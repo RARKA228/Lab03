@@ -1,0 +1,27 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Поиск автомобилей</h1>
+    <form method="GET" action="{{ url_for('search') }}">
+        <label>Название: <input type="text" name="query" value="{{ query|default('') }}"></label>
+        <label>Мин. рейтинг (1-5): <input type="number" name="min_rating" min="1" max="5" value="{{ min_rating|default('') }}"></label>
+        <button type="submit">Искать</button>
+    </form>
+
+    {% if message %}
+        <p><i>{{ message }}</i></p>
+    {% endif %}
+
+    {% if results %}
+        <ul>
+            {% for car in results %}
+                <li>
+                    <strong>{{ car.name }}</strong> - {{ car.price }} руб. (Средний рейтинг: {{ car.avg_rating }})
+                    <a href="{{ url_for('car_detail', product_id=car.id) }}">Подробнее</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Автосалон</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Главная</a> |
+        <a href="{{ url_for('add_car') }}">Добавить авто</a> |
+        <a href="{{ url_for('search') }}">Поиск</a>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

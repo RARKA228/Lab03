@@ -1,0 +1,17 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Список автомобилей</h1>
+    <ul>
+        {% for car in cars %}
+            <li>
+                <strong>{{ car.name }}</strong> - {{ car.price }} руб. (На складе: {{ car.stock }})
+                <a href="{{ url_for('car_detail', product_id=car.id) }}">Подробнее</a>
+            </li>
+        {% else %}
+            <p>Нет автомобилей в базе.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

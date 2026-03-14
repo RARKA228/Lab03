@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+
+  web:
+    build: .
+    container_name: app
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db_sql:5432/cars_db
+      - MONGO_URL=mongodb://db_web:27017/
+    depends_on:
+      - db_sql
+      - db_web
+
+  db_web:
+    image: mongo:latest
+    container_name: mondgo_db_practice
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+  db_sql:
+    image: postgres:15-alpine
+    container_name: postgres_db_practice
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=user
+    - POSTGRES_PASSWORD=pass
+    - POSTGRES_DB=cars_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

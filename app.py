@@ -115,7 +115,6 @@ def search():
                 'avg_rating': round(avg_rating, 2) if avg_rating > 0 else "Нет оценок"
             })
 
-    # Результаты отображаются на той же странице в виде списка [cite: 37]
     return render_template('search.html', results=results, query=query, min_rating=min_rating)
 
 
